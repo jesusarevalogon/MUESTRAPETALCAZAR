@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muestra Visual — Seguros Alcázar</title>
+<style>
+/* ══ RESET & BASE ══════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #1a1a2e;
+  --navy2:  #16213e;
+  --gold:   #c9a84c;
+  --gold-l: #fdf6e3;
+  --teal:   #0ea5a0;
+  --teal-d: #0d8c88;
+  --purple: #8b2fc9;
+  --purple-d: #7325a8;
+  --blue:   #2980b9;
+  --green:  #27ae60;
+  --red:    #e74c3c;
+  --off:    #f7f8fa;
+  --lgray:  #f0f1f4;
+  --mgray:  #d0d3d8;
+  --dgray:  #6b7280;
+  --text:   #1f2937;
+  --white:  #ffffff;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(0,0,0,.10);
+  --shadow-lg: 0 12px 48px rgba(0,0,0,.16);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  background: var(--off);
+  color: var(--text);
+  line-height: 1.55;
+  font-size: 15px;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ══ TOPBAR ════════════════════════════════════════════════════════════════ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--navy);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.3);
+  border-bottom: 2px solid var(--gold);
+}
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .03em;
+}
+.topbar-brand .dot {
+  width: 32px; height: 32px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: var(--navy);
+}
+.topbar-nav {
+  display: flex;
+  gap: 4px;
+}
+.topbar-nav a {
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 16px;
+  border-radius: 6px;
+  transition: all .2s;
+  font-weight: 500;
+}
+.topbar-nav a:hover { background: rgba(255,255,255,.12); color: var(--white); }
+.topbar-nav a.active { background: rgba(201,168,76,.2); color: var(--gold); }
+
+/* ══ HERO ══════════════════════════════════════════════════════════════════ */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 55%, #1b3a6b 100%);
+  padding: 90px 40px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(201,168,76,.15);
+  border: 1px solid rgba(201,168,76,.35);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  color: var(--white);
+  font-weight: 800;
+  line-height: 1.18;
+  margin-bottom: 18px;
+  position: relative;
+}
+.hero h1 .accent { color: var(--gold); }
+.hero-sub {
+  color: rgba(255,255,255,.72);
+  font-size: 17px;
+  max-width: 580px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  position: relative;
+}
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all .2s;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+}
+.btn-primary:hover { background: #b8943c; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,.35); }
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,.4);
+}
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+
+/* ══ SECTION WRAPPER ═══════════════════════════════════════════════════════ */
+.section {
+  padding: 80px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-full {
+  padding: 80px 40px;
+}
+.section-dark {
+  background: var(--navy);
+  color: var(--white);
+}
+.section-alt {
+  background: var(--lgray);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.section-title {
+  font-size: clamp(22px, 3.5vw, 34px);
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.22;
+}
+.section-dark .section-title { color: var(--white); }
+.section-sub {
+  color: var(--dgray);
+  font-size: 15px;
+  max-width: 520px;
+  margin-bottom: 48px;
+  line-height: 1.6;
+}
+.section-dark .section-sub { color: rgba(255,255,255,.65); }
+
+/* ══ PLAN TABS ══════════════════════════════════════════════════════════════ */
+.plan-nav {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--mgray);
+  margin-bottom: 56px;
+  overflow-x: auto;
+}
+.plan-tab {
+  padding: 14px 32px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dgray);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  white-space: nowrap;
+  transition: all .2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: inherit;
+}
+.plan-tab:hover { color: var(--navy); }
+.plan-tab.active-web  { color: var(--navy);   border-bottom-color: var(--navy); }
+.plan-tab.active-pro  { color: var(--teal);   border-bottom-color: var(--teal); }
+.plan-tab.active-max  { color: var(--purple); border-bottom-color: var(--purple); }
+
+/* ══ CARD GRID ══════════════════════════════════════════════════════════════ */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+.card-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+}
+
+/* ══ BROWSER MOCKUP ══════════════════════════════════════════════════════ */
+.browser {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--mgray);
+}
+.browser-bar {
+  background: #f0f0f0;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--mgray);
+}
+.browser-dots {
+  display: flex;
+  gap: 6px;
+}
+.browser-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.browser-url {
+  flex: 1;
+  background: var(--white);
+  border: 1px solid var(--mgray);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: var(--dgray);
+  font-family: monospace;
+}
+.browser-content {
+  overflow: hidden;
+  max-height: 320px;
+}
+.browser-content img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* ══ PHONE MOCKUP ══════════════════════════════════════════════════════════ */
+.phone-wrap {
+  display: flex;
+  justify-content: center;
+}
+.phone {
+  width: 180px;
+  background: var(--navy);
+  border-radius: 30px;
+  padding: 12px 8px;
+  box-shadow: var(--shadow-lg);
+}
+.phone-inner {
+  background: var(--white);
+  border-radius: 22px;
+  overflow: hidden;
+  height: 320px;
+}
+.phone-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* ══ FEATURE CHIP ══════════════════════════════════════════════════════════ */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.chip-navy  { background: rgba(26,26,46,.08); color: var(--navy); }
+.chip-teal  { background: rgba(14,165,160,.10); color: var(--teal-d); }
+.chip-purple{ background: rgba(139,47,201,.10); color: var(--purple-d); }
+.chip-gold  { background: var(--gold-l); color: #8b6a1f; }
+.chip-green { background: rgba(39,174,96,.10); color: #1e7d46; }
+
+/* ══ SCREEN PREVIEW CARD ═══════════════════════════════════════════════════ */
+.preview-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+}
+.preview-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.preview-card-label {
+  padding: 14px 18px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dgray);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--lgray);
+}
+.preview-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* ══ DASHBOARD MOCK ════════════════════════════════════════════════════════ */
+.dash-wrap {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--mgray);
+}
+.dash-sidebar {
+  background: var(--navy);
+  width: 200px;
+  min-height: 380px;
+  padding: 20px 0;
+  flex-shrink: 0;
+}
+.dash-body {
+  display: flex;
+}
+.dash-main {
+  flex: 1;
+  padding: 24px;
+  background: var(--off);
+}
+.dash-logo-area {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 12px;
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 14px;
+}
+.dash-nav-item {
+  padding: 10px 20px;
+  color: rgba(255,255,255,.65);
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.dash-nav-item:hover { background: rgba(255,255,255,.07); color: var(--white); }
+.dash-nav-item.active { background: rgba(201,168,76,.15); color: var(--gold); border-right: 3px solid var(--gold); }
+.dash-nav-icon { font-size: 14px; }
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.kpi-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.kpi-label { font-size: 11px; color: var(--dgray); font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
+.kpi-value { font-size: 22px; font-weight: 800; color: var(--navy); }
+.kpi-trend { font-size: 11px; color: var(--green); font-weight: 600; margin-top: 4px; }
+
+.dash-table {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.dash-table-header {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1fr 1fr;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 2px solid var(--lgray);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--dgray);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.dash-table-row {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1fr 1fr;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--lgray);
+  font-size: 13px;
+  align-items: center;
+}
+.dash-table-row:last-child { border-bottom: none; }
+.prospect-name { font-weight: 600; }
+.prospect-email { font-size: 11px; color: var(--dgray); }
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-nuevo    { background: #dbeafe; color: #1d4ed8; }
+.badge-contacto { background: #fef3c7; color: #92400e; }
+.badge-propuesta{ background: #d1fae5; color: #065f46; }
+.badge-cerrado  { background: var(--navy); color: var(--white); }
+
+/* ══ CHAT MOCK ══════════════════════════════════════════════════════════════ */
+.chat-wrap {
+  max-width: 440px;
+  margin: 0 auto;
+}
+.chat-window {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--mgray);
+}
+.chat-header {
+  background: var(--purple);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.chat-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.chat-info { flex: 1; }
+.chat-name { color: var(--white); font-weight: 700; font-size: 14px; }
+.chat-status { color: rgba(255,255,255,.7); font-size: 11px; }
+.chat-online { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; display: inline-block; margin-right: 4px; }
+
+.chat-body {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--off);
+  min-height: 260px;
+}
+.msg { display: flex; flex-direction: column; max-width: 80%; }
+.msg-bot { align-self: flex-start; }
+.msg-user { align-self: flex-end; }
+.msg-bubble {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.msg-bot .msg-bubble {
+  background: var(--white);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.msg-user .msg-bubble {
+  background: var(--purple);
+  color: var(--white);
+  border-bottom-right-radius: 4px;
+}
+.msg-time { font-size: 10px; color: var(--dgray); margin-top: 4px; padding: 0 4px; }
+.msg-bot .msg-time { align-self: flex-start; }
+.msg-user .msg-time { align-self: flex-end; }
+
+.chat-options {
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-top: 1px solid var(--lgray);
+  background: var(--white);
+}
+.chat-option {
+  border: 1.5px solid var(--purple);
+  color: var(--purple);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+.chat-option:hover { background: var(--purple); color: var(--white); }
+.chat-input-area {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--lgray);
+  background: var(--white);
+}
+.chat-input {
+  flex: 1;
+  border: 1.5px solid var(--mgray);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 13px;
+  outline: none;
+  font-family: inherit;
+}
+.chat-input:focus { border-color: var(--purple); }
+.chat-send {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--purple);
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+
+/* ══ FLOW DIAGRAM ══════════════════════════════════════════════════════════ */
+.flow-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  padding: 32px 0;
+}
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 140px;
+}
+.flow-icon {
+  width: 64px; height: 64px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  box-shadow: var(--shadow);
+}
+.flow-label { font-size: 12px; font-weight: 700; text-align: center; color: var(--text); }
+.flow-sub   { font-size: 10px; color: var(--dgray); text-align: center; }
+.flow-arrow {
+  font-size: 22px;
+  color: var(--mgray);
+  padding: 0 4px;
+  margin-bottom: 32px;
+}
+
+/* ══ SECTION PLANS ══════════════════════════════════════════════════════════ */
+.plan-section {
+  padding: 80px 0;
+  scroll-margin-top: 62px;
+}
+.plan-section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.plan-header-band {
+  border-radius: 14px;
+  padding: 36px 40px;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.plan-header-text h2 {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.plan-header-text p {
+  color: rgba(255,255,255,.75);
+  font-size: 15px;
+  max-width: 440px;
+}
+.plan-header-badge {
+  background: rgba(255,255,255,.15);
+  border: 1.5px solid rgba(255,255,255,.25);
+  border-radius: 10px;
+  padding: 16px 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.plan-header-badge .label { font-size: 11px; color: rgba(255,255,255,.7); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+.plan-header-badge .time  { font-size: 16px; color: var(--white); font-weight: 700; margin-top: 4px; }
+
+/* ══ STATS ROW ══════════════════════════════════════════════════════════════ */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.stat-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 22px 20px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--gold);
+}
+.stat-card.teal  { border-color: var(--teal); }
+.stat-card.purple{ border-color: var(--purple); }
+.stat-card.green { border-color: var(--green); }
+.stat-val { font-size: 28px; font-weight: 800; color: var(--navy); }
+.stat-label { font-size: 12px; color: var(--dgray); font-weight: 600; margin-top: 4px; }
+
+/* ══ STEP LIST ══════════════════════════════════════════════════════════════ */
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.step-num {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.step-navy  { background: var(--navy); color: var(--white); }
+.step-teal  { background: var(--teal); color: var(--white); }
+.step-purple{ background: var(--purple); color: var(--white); }
+.step-text h4 { font-size: 14px; font-weight: 700; color: var(--navy); }
+.step-text p  { font-size: 13px; color: var(--dgray); line-height: 1.5; }
+
+/* ══ FOOTER ════════════════════════════════════════════════════════════════ */
+.footer {
+  background: var(--navy);
+  color: rgba(255,255,255,.6);
+  text-align: center;
+  padding: 32px 40px;
+  font-size: 12px;
+  border-top: 2px solid var(--gold);
+}
+.footer strong { color: var(--gold); }
+
+/* ══ RESPONSIVE ════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .topbar { padding: 0 20px; }
+  .topbar-nav { display: none; }
+  .hero, .section, .plan-section-inner, .section-full { padding-left: 20px; padding-right: 20px; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .dash-sidebar { display: none; }
+  .flow-arrow { display: none; }
+  .plan-header-band { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TOPBAR ═══════════════════════════════════════════════════════════════ -->
+<header class="topbar">
+  <div class="topbar-brand">
+    <div class="dot">A</div>
+    <span>Seguros Alcázar — Vista Previa</span>
+  </div>
+  <nav class="topbar-nav">
+    <a href="#plan-web" class="active">Plan Web</a>
+    <a href="#plan-pro">Plan Web Pro</a>
+    <a href="#plan-max">Plan Max</a>
+  </nav>
+</header>
+
+<!-- ══ HERO ════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-badge">Vista previa del sistema digital</div>
+  <h1>Así se vería tu sistema<br><span class="accent">en Seguros Alcázar</span></h1>
+  <p class="hero-sub">
+    Cada sección de esta muestra representa una pieza real del sistema que construimos.
+    Diseño profesional, funcionamiento real, resultados medibles.
+  </p>
+  <div class="hero-ctas">
+    <a href="#plan-web" class="btn btn-primary">▶ Ver Plan Web</a>
+    <a href="#plan-pro" class="btn btn-outline">Ver Plan Web Pro</a>
+    <a href="#plan-max" class="btn btn-outline">Ver Plan Max</a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PLAN WEB
+═══════════════════════════════════════════════════════════════════════════ -->
+<section id="plan-web" class="plan-section" style="background: var(--white);">
+<div class="plan-section-inner">
+
+  <div class="plan-header-band" style="background: linear-gradient(135deg, #1a1a2e 0%, #23233f 100%);">
+    <div class="plan-header-text">
+      <h2>Plan Web</h2>
+      <p>Tu presencia institucional en línea. Sitio rápido, profesional y optimizado para generar contactos.</p>
+    </div>
+    <div class="plan-header-badge">
+      <div class="label">Entrega estimada</div>
+      <div class="time">3 – 4 semanas</div>
+    </div>
+  </div>
+
+  <div class="chip-row">
+    <span class="chip chip-navy">Sitio institucional</span>
+    <span class="chip chip-navy">Landing de captación</span>
+    <span class="chip chip-navy">Formularios</span>
+    <span class="chip chip-navy">Responsive</span>
+    <span class="chip chip-navy">SEO básico</span>
+    <span class="chip chip-gold">WhatsApp Business</span>
+  </div>
+
+  <!-- Sitio principal -->
+  <div style="margin-bottom: 56px;">
+    <div class="section-label">Pantalla 01</div>
+    <h3 style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:8px;">Inicio institucional</h3>
+    <p style="color:var(--dgray);margin-bottom:24px;font-size:14px;">Portada profesional que comunica confianza, servicios y formas de contacto desde el primer scroll.</p>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot" style="background:#ff5f56"></div>
+          <div class="browser-dot" style="background:#ffbd2e"></div>
+          <div class="browser-dot" style="background:#27c93f"></div>
+        </div>
+        <div class="browser-url">segurosalcazar.com</div>
+      </div>
+      <div class="browser-content">
+        <img src="../mockups/mockup_01_homepage.png" alt="Home institucional">
+      </div>
+    </div>
+  </div>
+
+  <!-- Landing + Mobile 2 cols -->
+  <div class="card-grid-2" style="margin-bottom:40px;">
+    <div>
+      <div class="section-label">Pantalla 02</div>
+      <h3 style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px;">Landing de captación</h3>
+      <p style="color:var(--dgray);font-size:13px;margin-bottom:16px;">Página enfocada en convertir visitas en prospectos con un formulario claro y oferta directa.</p>
+      <div class="preview-card">
+        <div class="preview-card-label">Landing · Seguro de Auto</div>
+        <img src="../mockups/mockup_02_landing_seguro.png" alt="Landing seguro">
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Pantalla 03</div>
+      <h3 style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px;">Versión móvil</h3>
+      <p style="color:var(--dgray);font-size:13px;margin-bottom:16px;">El sitio funciona perfectamente en cualquier dispositivo — donde está tu prospecto.</p>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-inner">
+            <img src="../mockups/mockup_03_mobile.png" alt="Versión móvil">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario -->
+  <div style="margin-bottom:20px;">
+    <div class="section-label">Pantalla 04</div>
+    <h3 style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px;">Formulario de cotización</h3>
+    <p style="color:var(--dgray);font-size:13px;margin-bottom:16px;">Simple, claro y conectado a tu correo — cada lead llega directo a tu bandeja.</p>
+    <div class="preview-card" style="max-width:560px;">
+      <div class="preview-card-label">Formulario · Solicitud de cotización</div>
+      <img src="../mockups/mockup_04_formulario.png" alt="Formulario">
+    </div>
+  </div>
+
+  <div class="step-list" style="max-width:580px;margin-top:40px;">
+    <div class="step-item">
+      <div class="step-num step-navy">1</div>
+      <div class="step-text">
+        <h4>El prospecto llega a tu sitio</h4>
+        <p>Desde Google, redes sociales o recomendación. Tu presencia profesional genera confianza inmediata.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num step-navy">2</div>
+      <div class="step-text">
+        <h4>Llena el formulario o escribe por WhatsApp</h4>
+        <p>Canales claros, sin fricciones. El prospecto elige cómo contactarte.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num step-navy">3</div>
+      <div class="step-text">
+        <h4>Tú recibes el contacto y das seguimiento</h4>
+        <p>Notificación directa a tu correo o WhatsApp con los datos del prospecto.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /plan-section-inner -->
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PLAN WEB PRO
+═══════════════════════════════════════════════════════════════════════════ -->
+<section id="plan-pro" class="plan-section" style="background: var(--lgray);">
+<div class="plan-section-inner">
+
+  <div class="plan-header-band" style="background: linear-gradient(135deg, #0d5c73 0%, #0a4a5c 100%);">
+    <div class="plan-header-text">
+      <h2>Plan Web Pro</h2>
+      <p>CRM integrado, seguimiento por etapa y dashboard de métricas. Tu equipo trabaja con información, no con suposiciones.</p>
+    </div>
+    <div class="plan-header-badge">
+      <div class="label">Entrega estimada</div>
+      <div class="time">6 – 8 semanas</div>
+    </div>
+  </div>
+
+  <div class="chip-row">
+    <span class="chip chip-teal">Todo Plan Web</span>
+    <span class="chip chip-teal">CRM integrado</span>
+    <span class="chip chip-teal">Hasta 3 landings</span>
+    <span class="chip chip-teal">Panel de seguimiento</span>
+    <span class="chip chip-teal">Dashboard</span>
+    <span class="chip chip-green">Automatización básica</span>
+  </div>
+
+  <!-- Dashboard -->
+  <div style="margin-bottom:52px;">
+    <div class="section-label">Pantalla 05</div>
+    <h3 style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:8px;">Dashboard ejecutivo</h3>
+    <p style="color:var(--dgray);font-size:14px;margin-bottom:24px;">Métricas clave de tu negocio en un solo lugar. Prospectos, conversiones, fuentes de captación.</p>
+
+    <div class="dash-wrap">
+      <div class="dash-body">
+        <div class="dash-sidebar">
+          <div class="dash-logo-area">Alcázar CRM</div>
+          <div class="dash-nav-item active">
+            <span class="dash-nav-icon">📊</span> Dashboard
+          </div>
+          <div class="dash-nav-item">
+            <span class="dash-nav-icon">👥</span> Prospectos
+          </div>
+          <div class="dash-nav-item">
+            <span class="dash-nav-icon">📋</span> Seguimiento
+          </div>
+          <div class="dash-nav-item">
+            <span class="dash-nav-icon">📩</span> Campañas
+          </div>
+          <div class="dash-nav-item">
+            <span class="dash-nav-icon">📈</span> Reportes
+          </div>
+          <div class="dash-nav-item">
+            <span class="dash-nav-icon">⚙️</span> Configuración
+          </div>
+        </div>
+        <div class="dash-main">
+          <div style="font-size:16px;font-weight:800;color:var(--navy);margin-bottom:16px;">Resumen del mes</div>
+          <div class="kpi-row">
+            <div class="kpi-card">
+              <div class="kpi-label">Prospectos</div>
+              <div class="kpi-value">84</div>
+              <div class="kpi-trend">↑ +12% vs mes anterior</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Cotizaciones</div>
+              <div class="kpi-value">41</div>
+              <div class="kpi-trend">↑ +8%</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Cierres</div>
+              <div class="kpi-value">18</div>
+              <div class="kpi-trend" style="color:var(--navy)">Tasa 43%</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Primas est.</div>
+              <div class="kpi-value" style="font-size:18px;">$162k</div>
+              <div class="kpi-trend">MXN este mes</div>
+            </div>
+          </div>
+          <div class="dash-table">
+            <div style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--navy);">Prospectos recientes</div>
+            <div class="dash-table-header">
+              <span>Nombre</span><span>Producto</span><span>Etapa</span><span>Fecha</span>
+            </div>
+            <div class="dash-table-row">
+              <div>
+                <div class="prospect-name">Ana Martínez García</div>
+                <div class="prospect-email">ana.martinez@correo.mx</div>
+              </div>
+              <div style="font-size:12px;">Seguro Vida</div>
+              <div><span class="badge badge-propuesta">Propuesta</span></div>
+              <div style="font-size:12px;color:var(--dgray);">26 abr</div>
+            </div>
+            <div class="dash-table-row">
+              <div>
+                <div class="prospect-name">Roberto Fuentes</div>
+                <div class="prospect-email">r.fuentes@empresa.mx</div>
+              </div>
+              <div style="font-size:12px;">Auto Flotilla</div>
+              <div><span class="badge badge-contacto">Contacto</span></div>
+              <div style="font-size:12px;color:var(--dgray);">25 abr</div>
+            </div>
+            <div class="dash-table-row">
+              <div>
+                <div class="prospect-name">Clínica San Rafael</div>
+                <div class="prospect-email">contacto@sanrafael.mx</div>
+              </div>
+              <div style="font-size:12px;">GMM Empresarial</div>
+              <div><span class="badge badge-nuevo">Nuevo</span></div>
+              <div style="font-size:12px;color:var(--dgray);">27 abr</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRM / Ficha -->
+  <div class="card-grid-2" style="margin-bottom:40px;">
+    <div>
+      <div class="section-label">Pantalla 06</div>
+      <h3 style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px;">Panel de prospectos</h3>
+      <p style="color:var(--dgray);font-size:13px;margin-bottom:16px;">Vista Kanban por etapa de venta — qué prospecto necesita atención hoy.</p>
+      <div class="preview-card">
+        <div class="preview-card-label">CRM · Vista de prospectos</div>
+        <img src="../mockups/mockup_06_prospectos.png" alt="Panel prospectos">
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Pantalla 07</div>
+      <h3 style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px;">Ficha de cliente</h3>
+      <p style="color:var(--dgray);font-size:13px;margin-bottom:16px;">Todo el historial del prospecto: contactos, pólizas, notas y documentos en un solo lugar.</p>
+      <div class="preview-card">
+        <div class="preview-card-label">CRM · Ficha de cliente</div>
+        <img src="../mockups/mockup_07_ficha_cliente.png" alt="Ficha cliente">
+      </div>
+    </div>
+  </div>
+
+  <div class="step-list" style="max-width:580px;margin-top:40px;">
+    <div class="step-item">
+      <div class="step-num step-teal">1</div>
+      <div class="step-text">
+        <h4>El prospecto llega por cualquier landing</h4>
+        <p>Seguro de vida, auto, GMM — cada campaña tiene su propia página de captación.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num step-teal">2</div>
+      <div class="step-text">
+        <h4>Entra directo al CRM con etapa asignada</h4>
+        <p>Sin copiar y pegar. El sistema registra el origen, hora y datos automáticamente.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num step-teal">3</div>
+      <div class="step-text">
+        <h4>El asesor hace seguimiento con contexto</h4>
+        <p>Ve el historial completo antes de llamar — tasa de cierre más alta, sin fricciones.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     PLAN MAX
+═══════════════════════════════════════════════════════════════════════════ -->
+<section id="plan-max" class="plan-section" style="background: var(--white);">
+<div class="plan-section-inner">
+
+  <div class="plan-header-band" style="background: linear-gradient(135deg, #8b2fc9 0%, #6b22a0 100%);">
+    <div class="plan-header-text">
+      <h2>Plan Max</h2>
+      <p>Automatización total. El sistema responde, califica, agenda y hace seguimiento — sin intervención manual.</p>
+    </div>
+    <div class="plan-header-badge">
+      <div class="label">Entrega estimada</div>
+      <div class="time">8 – 12 semanas</div>
+    </div>
+  </div>
+
+  <div class="chip-row">
+    <span class="chip chip-purple">Todo Plan Web Pro</span>
+    <span class="chip chip-purple">Asistente 24/7</span>
+    <span class="chip chip-purple">Automatización completa</span>
+    <span class="chip chip-purple">Landings ilimitadas</span>
+    <span class="chip chip-purple">Flujos automatizados</span>
+    <span class="chip chip-green">Reportes automáticos</span>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card purple">
+      <div class="stat-val">24/7</div>
+      <div class="stat-label">Respuesta automática</div>
+    </div>
+    <div class="stat-card teal">
+      <div class="stat-val">&lt; 30s</div>
+      <div class="stat-label">Tiempo de primera respuesta</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-val">100%</div>
+      <div class="stat-label">Prospectos registrados</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">0</div>
+      <div class="stat-label">Leads sin atender</div>
+    </div>
+  </div>
+
+  <!-- Chat -->
+  <div style="margin-bottom:52px;">
+    <div class="section-label">Pantalla 08</div>
+    <h3 style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:8px;">Asistente virtual automatizado</h3>
+    <p style="color:var(--dgray);font-size:14px;margin-bottom:28px;">Tu asistente responde al instante, califica el prospecto y lo agenda con el asesor correcto.</p>
+
+    <div class="card-grid-2" style="align-items:start;">
+      <div class="chat-wrap">
+        <div class="chat-window">
+          <div class="chat-header">
+            <div class="chat-avatar">🤖</div>
+            <div class="chat-info">
+              <div class="chat-name">Asistente Alcázar</div>
+              <div class="chat-status"><span class="chat-online"></span>En línea ahora</div>
+            </div>
+          </div>
+          <div class="chat-body">
+            <div class="msg msg-bot">
+              <div class="msg-bubble">¡Hola! Soy el asistente de Seguros Alcázar. ¿En qué puedo ayudarte hoy?</div>
+              <div class="msg-time">10:04 a.m.</div>
+            </div>
+            <div class="msg msg-user">
+              <div class="msg-bubble">Quiero cotizar un seguro de gastos médicos para mi empresa.</div>
+              <div class="msg-time">10:05 a.m.</div>
+            </div>
+            <div class="msg msg-bot">
+              <div class="msg-bubble">Perfecto. Para darte la mejor opción, ¿cuántos empleados tiene tu empresa aproximadamente?</div>
+              <div class="msg-time">10:05 a.m.</div>
+            </div>
+            <div class="msg msg-user">
+              <div class="msg-bubble">Somos 45 personas.</div>
+              <div class="msg-time">10:06 a.m.</div>
+            </div>
+            <div class="msg msg-bot">
+              <div class="msg-bubble">Excelente. Tengo opciones especiales para grupos de ese tamaño. ¿Prefieres que te llame un asesor hoy o mañana?</div>
+              <div class="msg-time">10:06 a.m.</div>
+            </div>
+          </div>
+          <div class="chat-options">
+            <div class="chat-option">Hoy en la tarde</div>
+            <div class="chat-option">Mañana por la mañana</div>
+          </div>
+          <div class="chat-input-area">
+            <input class="chat-input" type="text" placeholder="Escribe un mensaje...">
+            <button class="chat-send">➤</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label" style="margin-bottom:12px;">Lo que pasa detrás de la conversación</div>
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-num step-purple">1</div>
+            <div class="step-text">
+              <h4>Prospecto inicia conversación</h4>
+              <p>Desde el sitio, WhatsApp o red social — el sistema recibe el contacto.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num step-purple">2</div>
+            <div class="step-text">
+              <h4>Calificación automática</h4>
+              <p>El asistente detecta el producto de interés, el tamaño del cliente y la urgencia.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num step-purple">3</div>
+            <div class="step-text">
+              <h4>Entra al CRM con etiquetas</h4>
+              <p>El prospecto ya llega clasificado: producto, tamaño, canal de origen, temperatura.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num step-purple">4</div>
+            <div class="step-text">
+              <h4>Asesor recibe alerta con contexto</h4>
+              <p>Notificación inmediata. El asesor llama sabiendo exactamente qué necesita el cliente.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num step-purple">5</div>
+            <div class="step-text">
+              <h4>Seguimiento automático si no cierra</h4>
+              <p>El sistema envía recordatorios, documentos y ofertas según el tiempo transcurrido.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flujo visual -->
+  <div style="margin-bottom:40px;">
+    <div class="section-label">Flujo general del sistema</div>
+    <h3 style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:24px;">De visitante a cliente — sin intervención manual</h3>
+
+    <div class="flow-wrap">
+      <div class="flow-step">
+        <div class="flow-icon" style="background:#e8f4fd;">🌐</div>
+        <div class="flow-label">Visitante llega</div>
+        <div class="flow-sub">Sitio / WhatsApp / Redes</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon" style="background:#f3e8ff;">🤖</div>
+        <div class="flow-label">Asistente responde</div>
+        <div class="flow-sub">Califica y clasifica</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon" style="background:#d1fae5;">📋</div>
+        <div class="flow-label">Entra al CRM</div>
+        <div class="flow-sub">Con datos completos</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon" style="background:#fef3c7;">🔔</div>
+        <div class="flow-label">Asesor recibe alerta</div>
+        <div class="flow-sub">Contexto completo</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon" style="background:#d1fae5;">✅</div>
+        <div class="flow-label">Cierre o seguimiento</div>
+        <div class="flow-sub">Automatizado si no cierra</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Automatizado preview img -->
+  <div>
+    <div class="section-label">Pantalla 09</div>
+    <h3 style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:8px;">Panel de automatización</h3>
+    <p style="color:var(--dgray);font-size:13px;margin-bottom:16px;">Configura flujos, tiempos de seguimiento y mensajes automáticos — sin tocar código.</p>
+    <div class="preview-card" style="max-width:680px;">
+      <div class="preview-card-label">Flujo automatizado · Configuración</div>
+      <img src="../mockups/mockup_11_flujo_automatizado.png" alt="Flujo automatizado">
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <p><strong>Publicidad Enfoque y Talento, S.A. de C.V.</strong> — Propuesta preparada para Seguros Alcázar · Abril 2026</p>
+  <p style="margin-top:8px;">Esta muestra visual es referencial. El diseño final se ajusta a la identidad y necesidades de Seguros Alcázar.</p>
+</footer>
+
+<script>
+// Highlight nav links on scroll
+const sections = document.querySelectorAll('.plan-section');
+const links = document.querySelectorAll('.topbar-nav a');
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      links.forEach(a => a.classList.remove('active'));
+      const active = document.querySelector(`.topbar-nav a[href="#${id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.35 });
+
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
